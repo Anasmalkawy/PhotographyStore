@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.1738743">
+  <PropertyGroup>
+    <StartupCommand>npm start</StartupCommand>
+    <JavaScriptTestFramework>Jasmine</JavaScriptTestFramework>
+    <!-- Allows the build (or compile) script located on package.json to run on Build -->
+    <ShouldRunBuildScript>false</ShouldRunBuildScript>
+    <!-- Folder where production build objects will be placed -->
+    <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\photographystore.client\browser\</BuildOutputFolder>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="src\app\User\Khalid\**" />
+    <TypeScriptConfiguration Remove="src\app\User\Khalid\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\app\Admin\" />
+    <Folder Include="src\app\ANAS\" />
+    <Folder Include="src\app\ANAS_SER\" />
+    <Folder Include="src\app\Service\" />
+  </ItemGroup>
+</Project>

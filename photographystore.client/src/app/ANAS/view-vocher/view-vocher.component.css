@@ -1,0 +1,129 @@
+/* Main Container */
+.voucher-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Card Design */
+.voucher-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+}
+
+/* Header */
+.voucher-header {
+  background: #4a00e0;
+  color: white;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.voucher-code {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.discount-pill {
+  background: #ff8e00;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Body */
+.voucher-body {
+  padding: 20px;
+  position: relative;
+  text-align: center;
+}
+
+.voucher-title {
+  margin: 0 0 15px 0;
+  color: #333;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.discount-badge {
+  background: #f8f9fa;
+  border: 2px dashed #4a00e0;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.discount-value {
+  font-size: 32px;
+  font-weight: bold;
+  color: #4a00e0;
+  line-height: 1;
+}
+
+.discount-badge span:last-child {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Action Buttons - HIGH VISIBILITY */
+.voucher-actions {
+  display: flex;
+  border-top: 1px solid #f0f0f0;
+}
+
+.action-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+  .action-btn i {
+    font-size: 16px;
+  }
+
+/* Edit Button - Bright Blue */
+.edit {
+  background: #3498db;
+  color: white;
+}
+
+  .edit:hover {
+    background: #2980b9;
+  }
+
+/* Delete Button - Bright Red */
+.delete {
+  background: #e74c3c;
+  color: white;
+}
+
+  .delete:hover {
+    background: #c0392b;
+  }
+
+/* Hover Effects */
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}

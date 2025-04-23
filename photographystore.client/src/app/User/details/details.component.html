@@ -1,0 +1,190 @@
+<!-- Page Banner Section -->
+<div class="section section-wide" *ngIf="product">
+    <div class="container-fluid">
+        <div class="page-banner">
+            <div class="container">
+                <h2 class="page-title">{{ product.name }}</h2>
+                <ul class="page-breadcrumb">
+                    <li><a routerLink="/">Home</a></li>
+                    <li>{{ product.name }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Single Product Section -->
+<div class="section section-padding pb-0" *ngIf="product">
+    <div class="container">
+        <div class="row mbn-20">
+
+            <!-- Images -->
+            <div class="col-lg-6 col-12 mb-20">
+                <div class="single-product-images">
+                    <div class="single-product-image">
+                        <img *ngIf="product.img" [src]="product.img" alt="{{ product.name }}" class="img-fluid" loading="lazy" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Info -->
+            <div class="col-lg-6 col-12 mb-20">
+              <div class="single-product-content">
+                <div class="title-price">
+                  <h2 class="title">{{ product.name }}</h2>
+                  <span class="price">{{ product.price }} JD</span>
+                </div>
+
+                <div class="ratting">
+                  <div class="inner">
+                    <span>
+                      <i class="fa" *ngFor="let i of [1,2,3,4,5]" [ngClass]="i <= (product.rating || 5) ? 'fa-star' : 'fa-star-o'"></i>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="desc" *ngIf="product.specifications?.length">
+                  <h5>Specifications</h5>
+                  <ul>
+                    <li *ngFor="let spec of product.specifications">{{ spec }}</li>
+                  </ul>
+                </div>
+
+                <!-- <div class="quantity"> -->
+                <!--     <h5>Quantity:</h5> -->
+                <!--     <div class="pro-qty"> -->
+                <!--         <input type="number" min="1" [(ngModel)]="product.quantity"> -->
+                <!--     </div> -->
+                <!-- </div> -->
+
+                <div class="action">
+                  <a [routerLink]="['/cart']" class="action-btn action-cart">
+                    <i class="icofont-shopping-cart"></i>
+                  </a>
+                </div>
+
+                <div class="share">
+                  <h5>Share:</h5>
+                  <a (click)="share('facebook')"><i class="fa fa-facebook"></i></a>
+                  <a (click)="share('twitter')"><i class="fa fa-twitter"></i></a>
+                  <a (click)="share('instagram')"><i class="fa fa-instagram"></i></a>
+                  <a (click)="share('whatsapp')"><i class="fa fa-whatsapp"></i></a>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="col-12 mt-30 mb-20">
+                <ul class="single-product-tab-list nav">
+                    <li>
+                        <a (click)="activeTab = 'description'" [class.active]="activeTab === 'description'">description</a>
+                    </li>
+                    <li>
+                        <a (click)="activeTab = 'specifications'" [class.active]="activeTab === 'specifications'">specifications</a>
+                    </li>
+                    <li>
+                        <a (click)="activeTab = 'reviews'" [class.active]="activeTab === 'reviews'">reviews</a>
+                    </li>
+                </ul>
+
+
+                <div class="single-product-tab-content tab-content">
+                    <!-- Description -->
+                    <div *ngIf="activeTab === 'description'">
+                        <div class="row">
+                            <div class="single-product-description-content col-lg-8 col-12">
+                                <h4>About {{ product.name }}</h4>
+                                <p>{{ product.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Specifications -->
+                    <div *ngIf="activeTab === 'specifications'">
+                        <div class="single-product-specification">
+                            <ul>
+                                <li *ngFor="let spec of product.specifications">{{ spec }}</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Reviews -->
+                    <div *ngIf="activeTab === 'reviews'">
+                        <div class="product-ratting-wrap">
+                            <div class="pro-avg-ratting">
+                                <h4>4.5 <span>(Overall)</span></h4>
+                                <span>Based on 9 Comments</span>
+                            </div>
+                            <div class="ratting-list">
+                                <div class="sin-list" *ngFor="let stars of [5,4,3,2,1]">
+                                    <div class="d-flex align-items-center">
+                                        <div class="ratting-star">
+                                            <i class="fa" *ngFor="let s of [].constructor(stars)" [ngClass]="'fa-star'"></i>
+                                            <i class="fa" *ngFor="let s of [].constructor(5 - stars)" [ngClass]="'fa-star-o'"></i>
+                                        </div>
+                                        <span style="margin-left: 8px;">({{ stars === 5 ? 5 : stars === 4 ? 3 : stars === 3 ? 1 : 0 }})</span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="rattings-wrapper">
+                                <div class="sin-rattings" *ngFor="let review of reviews">
+                                    <div class="ratting-author">
+                                        <!-- <h4>{{ review.name }}</h4> -->
+                                        <div class="ratting-star">
+                                            <i class="fa" *ngFor="let s of [].constructor(review.rating)" [ngClass]="'fa-star'"></i>
+                                            <i class="fa" *ngFor="let s of [].constructor(5 - review.rating)" [ngClass]="'fa-star-o'"></i>
+                                            <span>({{ review.rating }})</span>
+                                        </div>
+                                    </div>
+                                     <p>{{ review.comment }}</p> 
+                                </div>
+                            </div>
+
+
+                            <form (ngSubmit)="submitReview(product.id)">
+                                <div class="ratting-form row">
+                                    <!-- النجوم -->
+                                    <div class="col-12 mb-15">
+                                        <h5>Rating:</h5>
+                                        <div class="ratting-star">
+                                            <i class="fa"
+                                               *ngFor="let star of [1,2,3,4,5]"
+                                               [ngClass]="newReview.rating >= star ? 'fa-star' : 'fa-star-o'"
+                                               (click)="setRating(star)"
+                                               style="cursor:pointer; color: black;"></i>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6 col-12 mb-20">
+                                        <label for="name">Name:</label>
+                                        <input id="name" name="name" [(ngModel)]="newReview.name" placeholder="Name" type="text" required>
+                                    </div>
+                                    <div class="col-md-6 col-12 mb-20">
+                                        <label for="email">Email:</label>
+                                        <input id="email" name="email" [(ngModel)]="newReview.email" placeholder="Email" type="email" required>
+                                    </div>
+                                    <div class="col-12 mb-20">
+                                        <label for="your-review">Your Review:</label>
+                                        <textarea id="your-review" name="comment" [(ngModel)]="newReview.comment" placeholder="Write a review" required></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn">Add Review</button>
+                                    </div>
+                                    <br />
+                                    <br />
+                                </div>
+                            </form>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
